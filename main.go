@@ -24,22 +24,27 @@ func main() {
 	updates := bot.GetUpdatesChan(u)
 
 	for update := range updates {
-		if update.Message != nil { // If we got a message
-			var reply string
-			nein, _ := re.MatchString("^[\n ]*[Nn][Ee][Ii][Nn]", update.Message.Text)
-			doch, _ := re.MatchString("^[\n ]*[Dd][Oo][Cc][Hh]", update.Message.Text)
-			oh, _ := re.MatchString("^[\n ]*[Oo][Hh] *[!]?[\n ]*$", update.Message.Text)
-			if nein {
-				reply = "Doch!"
-			} else if doch {
-				reply = "Oh!"
-			} else if oh {
-				reply = "👍"
-			}
-			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, reply)
-			msg.ReplyToMessageID = update.Message.MessageID
-			bot.Send(msg)
+		var request *tgbotapi.Message
+		// Whether we got a message
+		if update.Message != nil {
+			request = update.Message
+		} else if update.ChannelPost != nil {
+			request = update.ChannelPost
+		} else { continue }
+		var reply string
+		nein, _ := re.MatchString("^[\n ]*[Nn][Ee][Ii][Nn]", request.Text)
+		doch, _ := re.MatchString("^[\n ]*[Dd][Oo][Cc][Hh]", request.Text)
+		oh, _ := re.MatchString("^[\n ]*[Oo][Hh] *[!]?[\n ]*$", request.Text)
+		if nein {
+			reply = "Doch!"
+		} else if doch {
+			reply = "Oh!"
+		} else if oh {
+			reply = "👍"
 		}
+		log.Printf("[%s] %s", request.From.UserName, request.Text)
+		msg := tgbotapi.NewMessage(request.Chat.ID, reply)
+		msg.ReplyToMessageID = request.MessageID
+		bot.Send(msg)
 	}
 }
