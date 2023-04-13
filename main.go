@@ -42,7 +42,6 @@ func main() {
 		} else if oh {
 			reply = "👍"
 		}
-		log.Printf("[%s] %s", request.From.UserName, request.Text)
 		msg := tgbotapi.NewMessage(request.Chat.ID, reply)
 		msg.ReplyToMessageID = request.MessageID
 		bot.Send(msg)
