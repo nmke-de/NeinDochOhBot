@@ -13,3 +13,10 @@ Get a token from the [BotFather](https://t.me/BotFather).
 Write that token into the file `token` without trailing newline.
 
 Then `./run.sh`
+
+## Usage
+
+1. Add the bot to your group and give it admin privileges.
+2. Type `Nein!`, `Doch!` or `Oh!`
+3. Have fun.
+
