@@ -20,3 +20,6 @@ Then `./run.sh`
 2. Type `Nein!`, `Doch!` or `Oh!`
 3. Have fun.
 
+## Demo
+
+The bot is online under [https://t.me/NeinDochOhBot](https://t.me/NeinDochOhBot).
