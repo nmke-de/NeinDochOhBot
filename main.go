@@ -34,7 +34,7 @@ func main() {
 		var reply string
 		nein, _ := re.MatchString("^[\n ]*[Nn][Ee][Ii][Nn]", request.Text)
 		doch, _ := re.MatchString("^[\n ]*[Dd][Oo][Cc][Hh]", request.Text)
-		oh, _ := re.MatchString("^[\n ]*[Oo][Hh] *[.!]?[\n ]*$", request.Text)
+		oh, _ := re.MatchString("^[\n ]*[Oo][Hh] *.?[\n ]*$", request.Text)
 		if nein {
 			reply = "Doch!"
 		} else if doch {
